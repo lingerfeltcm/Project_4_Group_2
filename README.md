@@ -16,10 +16,10 @@ Based on data from 2010-2022, create a predictive model re: the  kinds of change
 
 Tasks:
 - Barrett - Pushed ReadMe, Cleaned data
-- Ben - Cleaning data,
+- Ben - Cleaning data
 - Cory - Started Repo, Merged data sets, created starter code
 - Kelly - Cleaned Data
-ALL - Collaboratively Create a Categorical Machine Learning Model to Streamline Health Expenditure Recommendations
+- ALL - Collaboratively Create a Categorical Machine Learning Model to Streamline Health Expenditure Recommendations
 
 Goals:
 - Selecting (a) dataset(s) and formulating a problem 
