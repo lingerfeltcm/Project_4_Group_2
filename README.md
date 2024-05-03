@@ -15,10 +15,10 @@ What are the effects of different countries’ government healthcare expenditure
 Based on data from 2010-2022, create a predictive model re: the  kinds of changes to health expenditures countries should make to lessen mortality rates via preemptive healthcare.
 
 Tasks:
-	- Barrett - Visualizations/Slide Deck
-	- Ben - Back End (ETL)
-	- Cory - Data and Data Delivery
-	- Kelly - Big Data Coding using SQL Database
+- Barrett - Visualizations/Slide Deck
+- Ben - Back End (ETL)
+- Cory - Data and Data Delivery
+- Kelly - Big Data Coding using SQL Database
 ALL - Collaboratively Create a Categorical Machine Learning Model to Streamline Health Expenditure Recommendations
 
 Goals for April 30th:
