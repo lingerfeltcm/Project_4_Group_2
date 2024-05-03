@@ -21,7 +21,7 @@ Tasks:
 - Kelly - Big Data Coding using SQL Database
 ALL - Collaboratively Create a Categorical Machine Learning Model to Streamline Health Expenditure Recommendations
 
-Goals for April 30th:
+Goals:
 - Selecting (a) dataset(s) and formulating a problem 
 - Outlining questions to be answered, tasks to be done etc.
 - Writing a one pager project proposal.
