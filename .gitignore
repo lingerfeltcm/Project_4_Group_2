@@ -1,0 +1,24 @@
+# Raw data files (too large for GitHub - see README for download links)
+data/raw/
+
+# Jupyter checkpoint files
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environment & credentials
+config.py
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

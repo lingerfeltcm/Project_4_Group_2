@@ -1,119 +1,159 @@
-# Project_4_Group_2
+# Healthcare Expenditure & Infectious Disease Mortality: A Global Analysis (2010–2022)
 
-Project 4 Group 2
+> Predicting infectious disease mortality outcomes from WHO health expenditure data using machine learning classification models.
 
-Members: Barrett Fudge, Ben Comfort, Cory Lingerfelt, Kelly Carter
+## Team
 
+Barrett Fudge, Ben Comfort, Cory Lingerfelt, Kelly Carter
 
-INTRODUCTION, Questions and Trends to be answered and observed:
+## Overview
 
-What are the effects of different countries’ government healthcare expenditures on their respective infectious disease mortality? 
-What nuanced trends in country and regional data (both economic and epidemiologically) stand out in a global arena? 
-Provided limited project time/scope, how can we conceptually make broader assumptions and best predict which countries would most benefit from increased healthcare spending and investment and how should that be structured ideally?
+This project investigates the relationship between national healthcare spending and infectious disease mortality across countries worldwide. Using data from the World Health Organization (WHO) spanning 2010–2022, we tested the hypothesis that higher healthcare expenditure as a percentage of GDP would correlate linearly with lower infectious disease death rates.
 
-Based on data from 2010-2022, we created a predictive machine model re: the kinds of changes to health expenditures countries should make to lessen mortality rates via preemptive and more efficient healthcare. Using data during this time period, how can we assess regions whose infectious disease mortality rates are the most sensitively affected by changes in heallthcare expenditures?
+Our exploratory analysis revealed that the relationship is statistically significant (p < 0.0001) but decidedly non-linear, prompting a pivot from regression to classification. A K-Nearest Neighbors classifier trained on health expenditure features achieved 89–92% accuracy in predicting whether a country's mortality rate falls above or below the global average — substantially outperforming logistic regression (63–67% accuracy).
 
-Databases: https://apps.who.int/nha/database/Select/Indicators/en
-https://www.who.int/data/collections
+## Research Questions
 
-Repository: https://github.com/lingerfeltcm/Project_4_Group_2.git
+1. What are the effects of different countries' government healthcare expenditures on their respective infectious disease mortality rates?
+2. What nuanced trends in country-level and regional data (economic and epidemiological) stand out in a global context?
+3. Which countries would most benefit from increased healthcare spending, and how should that investment be structured?
 
-Tasks:
-- Barrett - Pushed Report, cleaned data, edited statistical coding, created logistic and chart visualizations.
-- Ben - Merged and cleaned datasets, created SQL database, ran logistic and KNearest Neighbors predictive models.
-- Cory - Started Repo, merged data sets, created expenditures starter code, created linear visualizations.
-- Kelly - Cleaned Data
-- ALL - Collaboratively Created a Categorical Machine Learning Model to Streamline Health Expenditure Recommendations
+## Hypothesis
 
-## Goals:
-- Selecting (a) dataset(s) and formulating a problem and hypothesis, from broad to more specifically focused.
-- Outlining questions to be answered, tasks to be done by each team member. 
-- Writing a one pager project proposal.
+We hypothesized a negative, statistically significant linear correlation between health expenditures (as % of GDP) and infectious disease mortality rates — that is, as a country allocates more GDP to healthcare, mortality decreases in a roughly linear fashion. We also expected Current Health Expenditure (CHE) to be more predictive than Capital Health Expenditure (HK), given CHE's direct connection to goods and services delivery.
 
-## Methodology:
-- Data Extraction: pulled data from WHO datasets and merged them with inner join (i.e. WHO database countries with full data in both sets). 
-- Data Preprocessing: cleaned data sets by removing columns addressing non-infectious diseases, missing values/data fail to report, country outliers, and inconsistencies. Extracted relevant features from WHO data sets (see starter codes and dataframe merging). Store data in SQL database and ## query data based on targeted features. Read the SQL database into pandas for further analysis and modeling.
-- Model Development: identified and utilized most effective machine learning models (logistic regression, decision trees, random forests TBD) and the Scikit-learn machine learning library.
-- Model Evaluation and Statistical Analysis: analyze the statistical significance of tried regression models, displayed our ultimate machine learning model’s accuracy, precision, and recall.
-- Interpretation and Visualization: Used Tableau and Scikit to present numerous visualizations to construct a "story".
+**Outcome:** The linear hypothesis was rejected. While the correlation is statistically significant (p < 0.0001, Pearson r = -0.42), the relationship is non-linear, requiring non-parametric models for effective prediction.
 
-## PURPOSE IN SUMMARY
-This project focuses on the use of World Health Organization infectious disease data in predicting and making policy recommendations for decreasing future mortality rates across countries and global regions.
-
-## INITIAL HYPOTHESIS
-We initially hypothesized that there exists a negative and statistically significant linear correlation between health expenditures as a percentage of GDP and infectious disease mortality rates. In other words, as a country’s percentage of GDP allocated to healthcare increases, whether through actual spending or capital investments, infectious disease mortality rates decrease in a fairly direct (linear) way. We also presumed that current financial expenditures per year would be a more accurate way of accessing this relationship than using (often longer-termed) capital investments, public or private.
-
-## DATASET SOURCES
-We used the World Health Organization Mortality Database, World Global Health Expenditure Database 2010 - 2022 and Current Health Expenditure (CHE) and Capital Health Expenditure (HK) Database.
-
-https://platform.who.int/mortality/themes/theme-details/MDB/communicable-maternal-perinatal-and-nutritional-conditions
-
-http://apps.who.int/nha/database
-
-
-
-## CTE DATA
-We focused on the infectious disease mortality data (not including respiratory infections). Presumably infectious diseases have the potential to be more treatable and thus preventable than other causes of health-related death so that a country’s expenditures would have a greater correlation with this category of disease. Infectious diseases also accounted for 14% of the world-wide mortality rate in 2019 per Our World in Data (Source: https://ourworldindata.org/causes-of-death) -- providing a sizeable enough amount of data and research. The primary focus of our analysis was on the Age Standardized Mortality Rate per 100,000, which standardized our mortality data based on the life expectancy of a given country, as life expentancies vary greatly by physical region, development status of a country, and overall GDP wealth.
-
-In cleaning this data, brackets were removed for readability, data was limited to all age groups instead of also including age group breakdowns since we were more concerned with the country-wide mortality rate than rates for individual age groups (data would otherwise have been heavily skewed by child/infant mortality and elder death rates). Data was further limited to only include countries with 10 or more years worth of mortality rate data.
-
-WHO global expenditure data was filtered down to only show country statistics from 2010 to 2022. We centered on the columns that involved a country’s current health expenditure and capital health expenditure. These values contained per capita breakdowns of spending as well as a total percentage. The data was cleaned to only focus on countries with both health expenditure and mortality data for our decided upon time period.
-
-## Interaction with SQLThese datasets were joined and were stored in postgresSQL, from where we pulled the joined SQL dataframe to construct visuals and formulate a predictive model. We ran the database code within postgres to create the tables used in the analysis and model. Then import the corresponding csv files into each table. The 'expenditures_model' notebook will take the username and password from postgres. You may update them in the config file.
-
-## INITIAL EXPLORATORY ANALYSIS (working off merged and cleaned dataset)
-The initial exploratory analysis was working off our original assumption that the relationship between government expenditures on healthcare and mortality rates would be somewhat linear. To test this we used Tableau’s visualizations and trend lines to evaluate the R, R-squared, and P-value scores.
-
-It became apparent very quickly that there was not a strong linear correlation between these data variables; however, the P-Value scores for Current Health Expenditure (a government’s expenditures on the goods and services side of healthcare) as a percent of GDP showed a strong sign of significance with P-values being < 0.0001.
-
-However, no truly linear model was going to be able to predict mortality rates accurately.
-
-### Logistic regression
-- This model used the logistic_regression function from the scikitlearn library and aimed to classify each country as a variable in one of two groups: 'Prediction 0' and 'Prediction 1', meaning above or below the average mortality target, respectively. Our logistic regressions notably also presented us with P-values <0.0001, with a Pearson value of -0.42 (so, still leaving room for more accurate outputs).
-
-## Average Mortality Target
+## Project Structure
 
 ```
-# use the average and median of this column and use that to catagorize the data and make a new column to predict
-
-print(total_y.mean())
-print(total_y.median())
-
-
-# assign these to variables
-total_y_mean = total_y.mean()
-total_y_median = total_y.median()
-
-# create empty lists
-perc_of_total_avg = []
-perc_of_total_med = []
-
-# run a for loop that goes through the total_y array and assigns a 0 (below avg) or 1 (above avg)
-for x in total_y:
-    if x > total_y_mean:
-        perc_of_total_avg.append(1)
-    else:
-        perc_of_total_avg.append(0)
-        
-    if x > total_y_median:
-        perc_of_total_med.append(1)
-        
-    else:
-        perc_of_total_med.append(0)
+Project_4_Group_2/
+├── data/
+│   ├── raw/                  # Original WHO datasets (not tracked in git)
+│   │   ├── GHED_data.csv
+│   │   ├── WHOMortalityDatabase_Deaths_*.csv (5 files)
+│   │   └── agestandardized.csv
+│   └── cleaned/              # Processed datasets ready for analysis
+│       ├── expenditures.csv          (1,254 rows × 11 cols)
+│       ├── clean_infectious_disease.csv  (841 rows × 12 cols)
+│       ├── all_infectious_disease.csv
+│       ├── expmortjoin.csv           (356 rows × 16 cols)
+│       └── expmortjoin.xlsx
+├── notebooks/
+│   ├── 01_health_expenditures_cleaning.ipynb   # GHED data cleaning
+│   ├── 02_infect_cleaning.ipynb                # Mortality data cleaning
+│   ├── 03_expenditures_model.ipynb             # ML modeling & evaluation
+│   ├── 04_analysis.ipynb                       # Comprehensive analysis
+│   ├── starter_code_mortality.ipynb            # Exploratory starter code
+│   └── machine_model_mortality.ipynb           # Mortality model scaffold
+├── sql/
+│   └── exp_mort.sql          # PostgreSQL schema & data (project_4 database)
+├── reports/
+│   └── Project 4 Group 2 Presentation.pdf
+├── images/                   # Visualization outputs
+├── config.py                 # PostgreSQL credentials (not tracked in git)
+├── .gitignore
+└── README.md
 ```
 
-- The code takes both the median and the mean of every target column. However, we only used the average. 
-- We repeated this methodology for each target variable 'Percent_of_Total','Age_Stnd_Per_100k', 'Death_rate_per_100k'.
-- Both the training and testing predictions showed an overall accuracy below 70% for the logistic regression model.
+## Data Sources
 
+All data was sourced from the World Health Organization:
 
-## Using KNeighborsClassifier
-- We chose a non-parametric model in order to achieve better accuracy because of our findings in exploratory analysis as well as the failure of the logistic model. Out reasoning was that we acknowledged the breadth and complexity of our data but with underlying structural comoponents still needing to be retained.
+- **WHO Global Health Expenditure Database (GHED):** Country-level healthcare spending metrics including Current Health Expenditure (CHE) and Capital Health Expenditure (HK) as percentages of GDP, per capita USD, and total USD.
+  - Download: [apps.who.int/nha/database](http://apps.who.int/nha/database)
 
+- **WHO Mortality Database:** Infectious disease mortality rates by country, including age-standardized rates per 100,000, crude death rates, and percentage of total deaths attributable to infectious diseases.
+  - Download: [platform.who.int/mortality](https://platform.who.int/mortality/themes/theme-details/MDB/communicable-maternal-perinatal-and-nutritional-conditions)
 
-## RESULTS
+> **Note:** Raw data files exceed GitHub's 100MB limit and are excluded from this repository via `.gitignore`. Download them from the links above and place them in `data/raw/`.
 
-The analysis reveals that country-specific Health Expenditures play a significant role in predicting mortality rates associated with infectious diseases. Notably, the Current Health Expenditure (CHE) demonstrates a higher degree of statistical significance compared to Capital Health Expenditure (HK). Our findings suggest that Logistic regression, implemented through a KKNeighbors Classifier, offers the most accurate predictive capabilities, effectively navigating the complexity inherent in our dataset.
+## Methodology
 
-PREDICTIONS
-We would need to explore the WHO data more in depth and find other data sources to explore more non-linear predictive models. Additionally, breaking down the increases and decreases in health expenditures as %GDP over the years would -- if we bring in data indicators such as region/climate, cultural attitudes, government and socioeconomic stability of both individual countries and their regions -- provide a more nuanced prediction of how all these moving parts fit together to drive more informed healthcare policy-making in the future.
+### 1. Data Extraction & Cleaning
+
+**Health Expenditure Data** (`health_expenditures_cleaning.ipynb`): The GHED dataset was filtered to 2010–2022, retaining 11 key columns covering expenditure metrics across income levels. Rows with null values in critical financial columns were dropped, yielding 1,254 clean records.
+
+**Infectious Disease Mortality** (`infect_cleaning.ipynb`): WHO mortality data was filtered to all-age aggregates (excluding age-group breakdowns that would skew toward infant/elder mortality). Countries with fewer than 10 years of data were excluded, producing 841 records. Column names were standardized for SQL compatibility.
+
+### 2. Data Integration
+
+Both cleaned datasets were loaded into a PostgreSQL database (`project_4`) and joined on country code and year via inner join, producing a merged dataset of 356 records — countries with complete data in both expenditure and mortality databases.
+
+### 3. Feature Engineering & Target Variables
+
+Nine features were selected for modeling: `che_gdp(%)`, `hk_gdp(%)`, `che_pc_usd`, `che`, `gdp_pc_usd`, `che_usd`, and three income-level dummy variables (High, Lower-middle, Upper-middle).
+
+Three binary target variables were created by splitting each mortality metric at its mean:
+
+| Target Variable | Mean | Median | Description |
+|---|---|---|---|
+| Percent_of_Total | 3.74% | 3.06% | Infectious disease deaths as % of all deaths |
+| Age_Stnd_Per_100k | 21.04 | 16.51 | Age-standardized mortality rate per 100,000 |
+| Death_rate_per_100k | 20.88 | 15.97 | Crude death rate per 100,000 |
+
+### 4. Modeling
+
+**Logistic Regression** (baseline): Trained on unscaled features, achieving 63–67% accuracy with severely imbalanced recall (0.09–0.10 on the positive class), indicating the model defaulted to predicting the majority class.
+
+**K-Nearest Neighbors (k=3)** (final model): Trained on StandardScaler-normalized features, achieving balanced precision and recall across all three target variables:
+
+| Target | Accuracy | Precision (0/1) | Recall (0/1) |
+|---|---|---|---|
+| Percent_of_Total | **89%** | 0.96 / 0.78 | 0.86 / 0.93 |
+| Age_Stnd_Per_100k | **91%** | 0.96 / 0.82 | 0.90 / 0.93 |
+| Death_rate_per_100k | **92%** | 0.96 / 0.86 | 0.91 / 0.94 |
+
+## Key Findings
+
+1. **Statistical significance without linearity.** Current Health Expenditure as % of GDP shows a statistically significant relationship with infectious disease mortality (p < 0.0001), but the relationship is non-linear (Pearson r = -0.42).
+
+2. **CHE outperforms HK as a predictor.** Current Health Expenditure (direct spending on healthcare goods and services) is more predictive of mortality outcomes than Capital Health Expenditure (long-term infrastructure investment).
+
+3. **Non-parametric models excel.** KNN's ability to capture non-linear decision boundaries produced 89–92% accuracy versus logistic regression's 63–67%, validating the non-linear nature of the expenditure-mortality relationship.
+
+4. **Income level matters.** The inclusion of income-level dummy variables as features improved model performance, reflecting that a country's economic development mediates the expenditure-mortality relationship.
+
+## Setup & Reproduction
+
+### Prerequisites
+
+Python 3.10+, PostgreSQL 16+, and the following packages:
+
+```bash
+pip install pandas scikit-learn sqlalchemy psycopg2-binary matplotlib
+```
+
+### Database Setup
+
+1. Create a PostgreSQL database named `project_4`
+2. Run the SQL schema in `sql/exp_mort.sql` or import CSVs into the tables defined there
+3. Update `config.py` with your PostgreSQL credentials:
+   ```python
+   username = 'your_username'
+   password = 'your_password'
+   ```
+
+### Running the Analysis
+
+Execute notebooks in order:
+1. `notebooks/01_health_expenditures_cleaning.ipynb` — cleans GHED data
+2. `notebooks/02_infect_cleaning.ipynb` — cleans mortality data
+3. `notebooks/03_expenditures_model.ipynb` — runs ML models
+4. `notebooks/04_analysis.ipynb` — comprehensive analysis with visualizations
+
+## Limitations & Future Work
+
+The merged dataset contains only 356 records (countries with complete data in both sources), limiting model generalizability. Binary classification using the mean as threshold reduces nuance — future work could explore regression models or multi-class approaches. Only two model types were tested; ensemble methods (Random Forest, Gradient Boosting) and hyperparameter tuning (varying k in KNN) could improve results. Incorporating regional, climatic, and socioeconomic features beyond income level would enable more nuanced policy recommendations.
+
+## License
+
+This project was developed for educational purposes as part of a data analytics bootcamp.
+
+## Contributions
+
+- **Barrett Fudge** — Data cleaning, statistical coding, logistic and chart visualizations, project report
+- **Ben Comfort** — Dataset merging and cleaning, SQL database creation, logistic regression and KNN modeling
+- **Cory Lingerfelt** — Repository setup, dataset merging, expenditures starter code, linear visualizations
+- **Kelly Carter** — Data cleaning
+- **All** — Collaborative development of the categorical machine learning model
